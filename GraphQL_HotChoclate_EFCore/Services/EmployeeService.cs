@@ -41,16 +41,16 @@ namespace GraphQL_HotChoclate_EFCore.Services
             await _dbContext.SaveChangesAsync();
             return data;
         }
-        public async Task<bool> Delete(int id)
+        public async Task<Employee> Delete(int id)
         {
             var employee = await  _dbContext.Employees.FirstOrDefaultAsync(c => c.Id == id);
             if(employee is not null) 
             {
                 _dbContext.Employees.Remove(employee);
                 await _dbContext.SaveChangesAsync();
-                return true;
+                return employee;
             }
-            return false;
+            return null;
         }
 
     }

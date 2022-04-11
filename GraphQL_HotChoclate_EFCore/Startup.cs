@@ -31,6 +31,7 @@ namespace GraphQL_HotChoclate_EFCore
        
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyMethod().AllowAnyHeader()));
             services.AddCors();
 
             services.AddDbContext<DatabaseContext>(item => item.UseSqlServer(Configuration.GetConnectionString("myconn")));
@@ -43,7 +44,7 @@ namespace GraphQL_HotChoclate_EFCore
             });
 
             services.AddScoped<Query>();
-            services.AddScoped<Mutuation>();
+            services.AddScoped<Mutation>();
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<ILocationService, LocationService>();
 
@@ -51,7 +52,7 @@ namespace GraphQL_HotChoclate_EFCore
                                                   .AddServices(c)
                                                   //.AddType<GraphQLTypes>()
                                                   .AddQueryType<Query>()
-                                                  .AddMutationType<Mutuation>()
+                                                  .AddMutationType<Mutation>()
                                                   .Create());
         }
 
@@ -62,6 +63,8 @@ namespace GraphQL_HotChoclate_EFCore
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader());
+
+            //app.UseCors();
 
             if (env.IsDevelopment())
             {

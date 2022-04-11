@@ -1,0 +1,7 @@
+query employees () {
+            employees {
+              id
+              name
+              designation
+            }
+          }
